@@ -28,6 +28,6 @@
     "spreadsheet"
   ],
   "dependencies": {
-    "adm-zip": "~0.4.0"
+    "adm-zip": "*"
   }
 }
