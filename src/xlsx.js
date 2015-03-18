@@ -42,26 +42,26 @@ XlsxWriter.prototype.pack = function(filename, callback) {
     this.strings.forEach(function(string) {
         stringTable += blobs.string(self.escapeXml(string));
     });
-    zip.addFile('xl/sharedStrings.xml', new Buffer(blobs.stringsHeader(this.strings.length) + stringTable + blobs.stringsFooter));
+    zip.addFile('xl/sharedStrings.xml', new Buffer(blobs.stringsHeader(this.strings.length) + stringTable + blobs.stringsFooter), null, 0644 << 16);
 
     // [Content_types].xml
-    zip.addFile('[Content_Types].xml', new Buffer(blobs.contentTypes));
+    zip.addFile('[Content_Types].xml', new Buffer(blobs.contentTypes), null, 0644 << 16);
 
     // _rels/.rels
-    zip.addFile('_rels/.rels', new Buffer(blobs.rels));
+    zip.addFile('_rels/.rels', new Buffer(blobs.rels), null, 0644 << 16);
 
     // xl/workbook.xml
-    zip.addFile('xl/workbook.xml', new Buffer(blobs.workbook));
+    zip.addFile('xl/workbook.xml', new Buffer(blobs.workbook), null, 0644 << 16);
 
     // xl/styles.xml
-    zip.addFile('xl/styles.xml', new Buffer(blobs.styles));
+    zip.addFile('xl/styles.xml', new Buffer(blobs.styles), null, 0644 << 16);
 
     // xl/_rels/workbook.xml.rels
-    zip.addFile('xl/_rels/workbook.xml.rels', new Buffer(blobs.workbookRels));
+    zip.addFile('xl/_rels/workbook.xml.rels', new Buffer(blobs.workbookRels), null, 0644 << 16);
 
     // xl/worksheets/sheet1.xml
     var buffers = Array.prototype.concat([new Buffer(blobs.sheetHeader(dimensions))], this.sheetBuffers, [new Buffer(blobs.sheetFooter)]);
-    zip.addFile('xl/worksheets/sheet1.xml', Buffer.concat(buffers));
+    zip.addFile('xl/worksheets/sheet1.xml', Buffer.concat(buffers), null, 0644 << 16);
 
     // write the zip to the filesystem
     zip.writeZip(filename);
